@@ -1,8 +1,9 @@
-pipeline{
+pipeline {
     agent any
-    stages{
-        stage("Build"){
-            step{
+
+    stages {
+        stage("Build") {
+            steps {git
                 echo "Start Building"
                 sh "npm install"
                 sh "npm run build"
