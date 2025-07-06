@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     stages {
-        stage("Build") {
-            steps {
+        stage("Build"){
+            steps{
                 echo "Start Building"
                 sh "npm install"
                 sh "npm run build"
@@ -15,10 +15,9 @@ pipeline {
             steps{
 
                 echo "Starting Deployment on EC2"
-                sh "scp -r -o strictCheckingOfKey=No ./dist/* /home/ubuntu/node-app/"
+                sh "scp -r -o strictCheckingOfKey=No ./dist/* /home/ubuntu/Node-App/"
                 sh "npm start"
                 echo "Deployment done"
-                
             }
         }
     }
