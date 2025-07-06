@@ -22,13 +22,13 @@ pipeline {
                 echo "Starting Deployment on EC2..."
 
                 // Use sshagent to provide the private key
-                sshagent([env.SSH_CREDENTIAL_ID]) {
+                sshagent([ec2-ssh-key]) {
                     sh '''
-                        echo "Copying build artifacts to EC2..."
-                        scp -o StrictHostKeyChecking=no -r dist/* $EC2_USER@$EC2_HOST:/var/www/html
+                        echo "Copying build artifacts to EC2
+                    scp -o StrictHostChecking=no -r dist/ ubuntu@65.0.73.128:/var/www/html
+                    echo "Restarting web server on EC2"
+                    ssh -o StrictHostKeyChecking=no ubuntu@65.0.73.128 'sudo systemctl restart ngnix'
 
-                        echo "Restarting web server on EC2..."
-                        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST 'sudo systemctl restart nginx'
                     '''
                 }
 
@@ -37,3 +37,4 @@ pipeline {
         }
     }
 }
+
