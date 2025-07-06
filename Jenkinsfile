@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-    stages {
+    stages{
         stage("Build"){
             steps{
                 echo "Start Building"
@@ -13,7 +13,6 @@ pipeline {
 
         stage("Deploy"){
             steps{
-
                 echo "Starting Deployment on EC2"
                 sh "scp -r -o strictCheckingOfKey=No ./dist/* /home/ubuntu/Node-App/"
                 sh "npm start"
